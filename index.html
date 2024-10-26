@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Crime Management Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Check if user is logged in
+        window.onload = function() {
+            if (localStorage.getItem('loggedIn') !== 'true') {
+                alert("You must log in to access the dashboard.");
+                window.location.href = 'login.html'; // Redirect to login page
+            }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -17,6 +25,7 @@
                 <li><a href="#">Statistics</a></li>
                 <li><a href="#">Settings</a></li>
                 <li><a href="bankrequest.html">Bank request</a></li>
+                 <li><a href="#" id="logout">Logout</a></li> <!-- Add logout link -->
             </ul>
         </aside>
         <main class="main-content">
@@ -54,6 +63,14 @@
             </section>
         </main>
     </div>
-    <script src="script.js"></script>
+     <script src="script.js"></script>
+    <script>
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', function() {
+            localStorage.removeItem('loggedIn'); // Remove login flag
+            alert("You have logged out successfully.");
+            window.location.href = 'login.html'; // Redirect to login page
+        });
+    </script>
 </body>
 </html>
