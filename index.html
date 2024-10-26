@@ -6,11 +6,12 @@
     <title>Crime Management Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        // Check if user is logged in
-        window.onload = function() {
-            if (localStorage.getItem('loggedIn') !== 'true') {
+         window.onload = function() 
+         {
+            if (localStorage.getItem('loggedIn') !== 'true') 
+            {
                 alert("You must log in to access the dashboard.");
-                window.location.href = 'login.html'; // Redirect to login page
+                window.location.href = 'login.html'; 
             }
         };
     </script>
@@ -47,11 +48,11 @@
     </div>
     <script src="script.js"></script>
     <script>
-        // Logout functionality
-        document.getElementById('logout').addEventListener('click', function() {
-            localStorage.removeItem('loggedIn'); // Remove login flag
+            document.getElementById('logout').addEventListener('click', function() 
+        {
+            localStorage.removeItem('loggedIn'); 
             alert("You have logged out successfully.");
-            window.location.href = 'login.html'; // Redirect to login page
+            window.location.href = 'login.html';
         });
     </script>
 </body>
