@@ -6,14 +6,12 @@
     <title>Crime Management Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-         window.onload = function() 
-         {
-            if (localStorage.getItem('loggedIn') !== 'true') 
-            {
+        document.addEventListener("DOMContentLoaded", function() {
+            if (localStorage.getItem('loggedIn') !== 'true') {
                 alert("You must log in to access the dashboard.");
-                window.location.href = 'login.html'; 
+                window.location.href = 'login.html'; // Redirect to login page
             }
-        };
+        });
     </script>
 </head>
 <body>
