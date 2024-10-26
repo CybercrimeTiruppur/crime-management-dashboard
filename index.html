@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Crime Management Dashboard</title>
+    <title>Crime Management Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <script>
         // Check if user is logged in
@@ -12,6 +12,7 @@
                 alert("You must log in to access the dashboard.");
                 window.location.href = 'login.html'; // Redirect to login page
             }
+        };
     </script>
 </head>
 <body>
@@ -19,17 +20,17 @@
         <aside class="sidebar">
             <h2>Dashboard</h2>
             <ul>
-                <li><a href="home.html">Home</a></li> 
+                <li><a href="home.html">Home</a></li>
+                <li><a href="bank-request.html">Bank Request</a></li>
                 <li><a href="#">Incident Reports</a></li>
                 <li><a href="#">Case Management</a></li>
                 <li><a href="#">Statistics</a></li>
                 <li><a href="#">Settings</a></li>
-                <li><a href="bankrequest.html">Bank request</a></li>
-                 <li><a href="#" id="logout">Logout</a></li> <!-- Add logout link -->
+                <li><a href="#" id="logout">Logout</a></li>
             </ul>
         </aside>
         <main class="main-content">
-            <h1> Tiruppur City-CCPS-Crime Management Dashboard </h1>
+            <h1>Crime Management Dashboard</h1>
             <div class="card">
                 <h3>Total Incidents</h3>
                 <p id="total-incidents">0</p>
@@ -42,28 +43,9 @@
                 <h3>Resolved Cases</h3>
                 <p id="resolved-cases">0</p>
             </div>
-            <section>
-                <h2>Welcome to the Crime Management Dashboard of Tiruppur City Cyber Crime PS</h2>
-                <p>This dashboard is designed to help law enforcement manage and analyze crime data effectively.</p>
-                <p>Here, you can:</p>
-                <ul>
-                    <li>View crime statistics and trends</li>
-                    <li>Report new incidents</li>
-                    <li>Access resources for crime prevention</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Latest News</h2>
-                <p>Stay updated with the latest developments:</p>
-                <ul>
-                    <li><strong>Feature Updates:</strong> New reporting tools are now live.</li>
-                    <li><strong>Upcoming Events:</strong> Community safety workshops scheduled for next month.</li>
-                    <li><strong>Collaborations:</strong> Partnering with local organizations for safety initiatives.</li>
-                </ul>
-            </section>
         </main>
     </div>
-     <script src="script.js"></script>
+    <script src="script.js"></script>
     <script>
         // Logout functionality
         document.getElementById('logout').addEventListener('click', function() {
