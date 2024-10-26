@@ -14,10 +14,14 @@
 
     <main>
         <form id="bank-request-form">
-            <label for="account-number">Account Number:</label>
-            <input type="text" id="account-number" required><br><br>
-            <label for="ifsc-code">IFSC Code:</label>
-            <input type="text" id="ifsc-code" required><br><br>
+            <label for="aadhaar-number">Suspect’s Aadhaar Number:</label>
+            <input type="text" id="aadhaar-number" required><br><br>
+            <label for="pan-number">Suspect’s Pan Number:</label>
+            <input type="text" id="pan-number" required><br><br>
+            <label for="mobile-numbers">Suspect’s Mobile Numbers (comma-separated):</label>
+            <input type="text" id="mobile-numbers" required><br><br>
+            <label for="case-details">Details of the case:</label>
+            <textarea id="case-details" required></textarea><br><br>
             <button type="submit">Generate Request</button>
         </form>
     </main>
