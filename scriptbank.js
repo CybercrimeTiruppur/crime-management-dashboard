@@ -14,5 +14,5 @@ document.getElementById('bank-request-form').addEventListener('submit', function
     doc.text(`IFSC Code: ${ifscCode}`, 10, 40);
     
     // Save the generated PDF
-    doc.save('bank-request.pdf');
+    doc.save('bank-request.pdf'); // This triggers the download
 });
