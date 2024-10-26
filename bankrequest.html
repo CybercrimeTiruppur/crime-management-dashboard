@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Request Form</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- jsPDF library -->
+</head>
+<body>
+    <header>
+        <h1>Bank Request Form</h1>
+    </header>
+
+    <main>
+        <form id="bank-request-form">
+            <label for="account-number">Account Number:</label>
+            <input type="text" id="account-number" required><br><br>
+            <label for="ifsc-code">IFSC Code:</label>
+            <input type="text" id="ifsc-code" required><br><br>
+            <button type="submit">Generate Request</button>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
