@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <title>Login - Cyber Crime PS Tiruppur City</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <header>
-        <h1>Login to Crime Management System</h1>
+        <h1>Cyber Crime PS Tiruppur City</h1>
     </header>
-
-    <main>
-        <form id="login-form">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
             <label for="username">Username:</label>
-            <input type="text" id="username" required><br><br>
+            <input type="text" id="username" name="username" required>
+            
             <label for="password">Password:</label>
-            <input type="password" id="password" required><br><br>
+            <input type="password" id="password" name="password" required>
+            
             <button type="submit">Login</button>
         </form>
-    </main>
+    </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
 
-    <script src="login.js"></script> <!-- Link to your JS file for login -->
+            if (username === "admin" && password === "password") {
+                localStorage.setItem('loggedIn', 'true'); 
+                window.location.href = 'index.html'; 
+            } else {
+                alert("Incorrect username or password");
+            }
+        });
+    </script>
 </body>
 </html>
