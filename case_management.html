@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Management Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Crime Case Management - Cyber Crime PS Tiruppur City</h1>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Case Management</h2>
+            <ul>
+                <li><a href="#">Add New Case</a></li>
+                <li><a href="#">Update Case</a></li>
+                <li><a href="#">View Cases</a></li>
+                <li><a href="#">Generate Requests</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <section class="case-section">
+                <h2>Add New Case</h2>
+                <form id="addCaseForm">
+                    <label for="caseTitle">Case Title:</label>
+                    <input type="text" id="caseTitle" name="caseTitle" required>
+
+                    <label for="caseDescription">Description:</label>
+                    <textarea id="caseDescription" name="caseDescription" required></textarea>
+
+                    <label for="caseDate">Date:</label>
+                    <input type="date" id="caseDate" name="caseDate" required>
+
+                    <button type="submit">Add Case</button>
+                </form>
+            </section>
+
+            <section class="case-section">
+                <h2>Update Case</h2>
+                <form id="updateCaseForm">
+                    <label for="caseId">Select Case:</label>
+                    <select id="caseId" name="caseId">
+                        <option>Select a case...</option>
+                        <!-- Options populated dynamically -->
+                    </select>
+
+                    <label for="updateDetails">Update Details:</label>
+                    <textarea id="updateDetails" name="updateDetails"></textarea>
+
+                    <h3>Generate Requests</h3>
+                    <label for="requestType">Request Type:</label>
+                    <select id="requestType">
+                        <option>Bank</option>
+                        <option>WhatsApp</option>
+                        <option>Facebook</option>
+                        <option>Telegram</option>
+                        <option>Twitter</option>
+                        <option>Website Host</option>
+                        <option>Other</option>
+                    </select>
+
+                    <label for="requestDetails">Request Details:</label>
+                    <textarea id="requestDetails"></textarea>
+
+                    <button type="button" onclick="generateRequest()">Generate Request</button>
+                    <button type="submit">Update Case</button>
+                </form>
+            </section>
+
+            <section class="case-section">
+                <h2>View Cases</h2>
+                <table id="caseTable">
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Last Update</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Cases will be populated here dynamically -->
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="timeline-section">
+                <h2>Timeline</h2>
+                <div id="timeline">
+                    <!-- Timeline updates dynamically -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function generateRequest() {
+            const requestType = document.getElementById('requestType').value;
+            const requestDetails = document.getElementById('requestDetails').value;
+
+            const timeline = document.getElementById('timeline');
+            const timestamp = new Date().toLocaleString();
+
+            const newTimelineItem = document.createElement('div');
+            newTimelineItem.classList.add('timeline-item');
+            newTimelineItem.innerHTML = `
+                <h4>${requestType} Request</h4>
+                <p>${requestDetails}</p>
+                <span>${timestamp}</span>
+            `;
+
+            timeline.appendChild(newTimelineItem);
+        }
+    </script>
+
+    <style>
+        /* Styles for layout */
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+        }
+        .sidebar {
+            width: 20%;
+            background-color: #444;
+            color: #fff;
+            padding: 15px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            padding: 8px 0;
+        }
+        .sidebar ul li a:hover {
+            background-color: #555;
+            color: #fff;
+        }
+        .main-content {
+            width: 80%;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .case-section, .timeline-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #caseTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #caseTable th, #caseTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #caseTable th {
+            background-color: #333;
+            color: white;
+        }
+        .timeline-item {
+            background: #e0e0e0;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .timeline-item h4 {
+            margin: 0 0 5px;
+        }
+        .timeline-item span {
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</body>
+</html>
