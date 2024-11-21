@@ -427,14 +427,14 @@ function generate106PDF() {
     const doc = new jsPDF();
 
     // Add title and subtitle
-    doc.setFont('Times New Roman', 'bold');
+    doc.setFont('Times', 'bold');
     doc.text('Submitted,', 10, 20);
     doc.text('IN THE COURT OF HON’BLE JUDICIAL MAGISTRATE III', 105, 30, { align: 'center' });
     doc.text('TIRUPUR DISTRICT', 105, 40, { align: 'center' });
     doc.text('PETITION U/S 106 B.N.S.S', 105, 50, { align: 'center' });
 
     // Add subject and reference
-    doc.setFont('Times New Roman', 'normal');
+    doc.setFont('Times', 'normal');
     doc.text('Sub: Case – Criminal Case – Intimation for freezing the suspect’s Bank Account.', 10, 60);
     doc.text('Ref:', 10, 70);
     doc.text(`1) CCPS FIR No: ${firnumber} u/s ${sections} , Dt: ${firDate}.`, 15, 80);
@@ -448,14 +448,14 @@ function generate106PDF() {
     doc.text('involved in the case.', 10, 140);
    
     // Add table headers
-    doc.setFont('Times New Roman', 'bold');
+    doc.setFont('Times', 'bold');
     doc.text("S.No", 30, 180);
     doc.text("Bank Name", 60, 180); // Added Bank Name column
     doc.text("Account Number", 100, 180);
     doc.text("IFSC Code", 160, 180);
 
     // Add table data
-    doc.setFont('Times New Roman', 'normal');
+    doc.setFont('Times', 'normal');
     const accountNumbers = [];
     const ifscCodes = [];
     const bankNames = []; // Array to store bank names
@@ -483,7 +483,7 @@ function generate106PDF() {
     });
 
     // Add footer
-    doc.setFont('Times New Roman', 'bold');
+    doc.setFont('Times', 'bold');
     doc.text('Inspector of Police', 10, 200);
     doc.text('Cybercrime Police Station', 10, 210);
     doc.text('Tiruppur City', 10, 220);
