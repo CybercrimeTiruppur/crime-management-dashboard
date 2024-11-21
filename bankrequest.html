@@ -41,7 +41,7 @@
         input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus, select:focus {
             border-color: #007BFF;
         }
-        button {
+        button, .button-link {
             background-color: #007BFF;
             color: white;
             padding: 12px 20px;
@@ -51,8 +51,11 @@
             transition: background-color 0.3s;
             width: 100%;
             margin-bottom: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
-        button:hover {
+        button:hover, .button-link:hover {
             background-color: #0056b3;
         }
         .button-container {
@@ -199,6 +202,7 @@
             <div class="button-container">
                 <button id="generatePdfButton" type="button">Generate PDF</button>
                 <button id="Generate106" type="button">Generate 106 PDF</button>
+                <a href="bankmanagement.html" class="button-link">Bank Management</a>
             </div>
         </form>
     </div>
