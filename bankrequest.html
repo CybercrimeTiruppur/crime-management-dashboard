@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate PDF</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-      <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-  <script src="https://unpkg.com/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -212,6 +212,14 @@
         </form>
     </div>
     <script>
+        document.getElementById('generatePdfButton').addEventListener('click', function(){
+            console.log("generatePdfButton clicked");
+            generatePDF();
+        });
+        document.getElementById('Generate106').addEventListener('click', function(){
+            console.log("Generate106 clicked");
+            generate106PDF();
+        });
         document.addEventListener('DOMContentLoaded', function() {
             fetch('banks.json')
                 .then(response => response.json())
@@ -413,6 +421,76 @@ const firDate = document.getElementById("firDate").value;
 
             document.getElementById('generatePdfButton').addEventListener('click', generatePDF);
         });
+
+function generate106PDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Add title and subtitle
+    doc.setFont('Times New Roman', 'bold');
+    doc.text('Submitted,', 10, 20);
+    doc.text('IN THE COURT OF HON’BLE JUDICIAL MAGISTRATE III', 105, 30, { align: 'center' });
+    doc.text('TIRUPUR DISTRICT', 105, 40, { align: 'center' });
+    doc.text('PETITION U/S 106 B.N.S.S', 105, 50, { align: 'center' });
+
+    // Add subject and reference
+    doc.setFont('Times New Roman', 'normal');
+    doc.text('Sub: Case – Criminal Case – Intimation for freezing the suspect’s Bank Account.', 10, 60);
+    doc.text('Ref:', 10, 70);
+    doc.text(`1) CCPS FIR No: ${firnumber} u/s ${sections} , Dt: ${firDate}.`, 15, 80);
+    doc.text(`2) CSR No: ${csrnumber} , Dt: ${csrDate}.`, 15, 90);
+    doc.text(`3) NCRP ACK NO: ${ncrpAckNumber}, Dt: ${ncrpAckDate}.`, 15, 100);
+
+    // Add main content
+    doc.text('It is submitted that during the investigation of the case cited in the reference,', 10, 110);
+    doc.text('debit freeze requests have been issued to the respective nodal officers of the below-', 10, 120);
+    doc.text('listed bank accounts, as they were found to have received the fraudulent funds', 10, 130);
+    doc.text('involved in the case.', 10, 140);
+   
+    // Add table headers
+    doc.setFont('Times New Roman', 'bold');
+    doc.text("S.No", 30, 180);
+    doc.text("Bank Name", 60, 180); // Added Bank Name column
+    doc.text("Account Number", 100, 180);
+    doc.text("IFSC Code", 160, 180);
+
+    // Add table data
+    doc.setFont('Times New Roman', 'normal');
+    const accountNumbers = [];
+    const ifscCodes = [];
+    const bankNames = []; // Array to store bank names
+    const rows = tableBody.querySelectorAll('tr');
+    rows.forEach(row => {
+        const accountNumber = row.cells[0].textContent.trim();
+        const ifscCode = row.cells[1].textContent.trim();
+        const bankName = selectedBank; // Retrieve bank name from $selectedBank
+
+        if (accountNumber && ifscCode) {
+            accountNumbers.push(accountNumber);
+            ifscCodes.push(ifscCode);
+            bankNames.push(bankName); // Add bank name to the array
+        }
+    });
+
+    accountNumbers.forEach((accountNumber, index) => {
+        const ifsc = ifscCodes[index] || '';
+        const bankName = bankNames[index] || '';
+        const yPosition = 190 + (index * 10);
+        doc.text((index + 1).toString(), 30, yPosition);
+        doc.text(bankName.trim(), 60, yPosition); // Print bank name
+        doc.text(accountNumber.trim(), 100, yPosition);
+        doc.text(ifsc.trim(), 160, yPosition);
+    });
+
+    // Add footer
+    doc.setFont('Times New Roman', 'bold');
+    doc.text('Inspector of Police', 10, 200);
+    doc.text('Cybercrime Police Station', 10, 210);
+    doc.text('Tiruppur City', 10, 220);
+
+    // Save the PDF
+        doc.save('petition_106.pdf');
+    }
     </script>
 </body>
 </html>
