@@ -1,8 +1,11 @@
 <?php
+header('Content-Type: application/json');
+
+$file = 'c:/xampp/htdocs/myproject/banks.json'; // Path to your JSON file
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = file_get_contents('php://input');
-    $file = 'c:/xampp/htdocs/myproject/banks.json'; // Path to your JSON file
 
     // Validate the JSON data
     if (json_decode($data) !== null) {
