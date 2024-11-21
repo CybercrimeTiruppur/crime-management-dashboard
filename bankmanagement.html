@@ -1,108 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Management</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        button {
-            margin: 5px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Bank Management</h1>
-    <button onclick="addBank()">Add New Bank</button>
-    <table id="bankTable">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Rows will be populated by JavaScript -->
-        </tbody>
-    </table>
+<script>
+    let banks = [];
 
-    <script>
-        let banks = [];
+    function loadBanks() {
+        fetch('banks.json')
+            .then(response => response.json())
+            .then(data => {
+                banks = data;
+                const tableBody = document.getElementById('bankTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = ''; // Clear existing rows
 
-        function loadBanks() {
-            fetch('banks.json')
-                .then(response => response.json())
-                .then(data => {
-                    banks = data;
-                    const tableBody = document.getElementById('bankTable').getElementsByTagName('tbody')[0];
-                    tableBody.innerHTML = ''; // Clear existing rows
+                banks.forEach((bank, index) => {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).innerText = bank.name;
+                    row.insertCell(1).innerText = bank.email;
+                    const actionsCell = row.insertCell(2);
+                    actionsCell.innerHTML = `<button onclick="editBank(${index})">Modify</button>
+                                             <button onclick="deleteBank(${index})">Delete</button>`;
+                });
+            })
+            .catch(error => console.error('Error loading banks:', error));
+    }
 
-                    banks.forEach((bank, index) => {
-                        const row = tableBody.insertRow();
-                        row.insertCell(0).innerText = bank.name;
-                        row.insertCell(1).innerText = bank.email;
-                        const actionsCell = row.insertCell(2);
-                        actionsCell.innerHTML = `<button onclick="editBank(${index})">Modify</button>
-                                                 <button onclick="deleteBank(${index})">Delete</button>`;
-                    });
-                })
-                .catch(error => console.error('Error loading banks:', error));
+    function addBank() {
+        const name = prompt("Enter bank name:");
+        const email = prompt("Enter bank email:");
+        if (name && email) {
+            banks.push({ name, email });
+            loadBanks(); // Refresh the table to show the new bank
+            saveBanks(); // Save the updated list to the server
+        } else {
+            console.error("Name and Email are required");
         }
+    }
 
-        function addBank() {
-            const name = prompt("Enter bank name:");
-            const email = prompt("Enter bank email:");
-            if (name && email) {
-                banks.push({ name, email });
-                loadBanks();
-                saveBanks();
+    function editBank(index) {
+        const name = prompt("Edit bank name:", banks[index].name);
+        const email = prompt("Edit bank email:", banks[index].email);
+        if (name && email) {
+            banks[index] = { name, email };
+            loadBanks();
+            saveBanks();
+        }
+    }
+
+    function deleteBank(index) {
+        if (confirm("Are you sure you want to delete this bank?")) {
+            banks.splice(index, 1);
+            loadBanks();
+            saveBanks();
+        }
+    }
+
+    function saveBanks() {
+        fetch('update_banks.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(banks)
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            return response.text(); // Use text() to see the raw response
+        })
+        .then(data => {
+            console.log('Response data:', data);
+            try {
+                const jsonData = JSON.parse(data);
+                console.log('Parsed JSON:', jsonData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
             }
-        }
+        })
+        .catch(error => console.error('Error:', error));
+    }
 
-        function editBank(index) {
-            const name = prompt("Edit bank name:", banks[index].name);
-            const email = prompt("Edit bank email:", banks[index].email);
-            if (name && email) {
-                banks[index] = { name, email };
-                loadBanks();
-                saveBanks();
-            }
-        }
-
-        function deleteBank(index) {
-            if (confirm("Are you sure you want to delete this bank?")) {
-                banks.splice(index, 1);
-                loadBanks();
-                saveBanks();
-            }
-        }
-
-        function saveBanks() {
-            fetch('update_banks.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(banks)
-            }).then(response => response.json())
-              .then(data => console.log(data))
-              .catch(error => console.error('Error:', error));
-        }
-
-        // Initial load
-        loadBanks();
-    </script>
-</body>
-</html>
+    // Initial load
+    loadBanks();
+</script>
